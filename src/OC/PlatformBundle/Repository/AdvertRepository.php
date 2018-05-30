@@ -103,4 +103,22 @@ class AdvertRepository extends EntityRepository
 
       return $qb->getQuery()->getResult();
     }
+
+    public function getAdverts()
+    {
+      $query = $this->createQueryBuilder('a')
+      ->leftJoin('a.image', 'i')
+      ->addSelect('i')
+      ->leftJoin('a.categories', 'c')
+      ->addSelect('c')
+      ->orderBy('a.date', 'DESC')
+      ->getQuery();
+
+      $query
+      ->setFirstResult(($page-1) * $nbPerPage)
+      ->setMaxResults($nbPerPage)
+
+      return new Paginator($query, true);
+    }
+
 }

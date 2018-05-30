@@ -45,6 +45,7 @@ class Advert
     {
       $this->date = new \DateTime();
       $this->categories = new ArrayCollection();
+      $this->applications = new ArrayCollection();
     }
 
     /**
